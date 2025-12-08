@@ -2,7 +2,7 @@ import {
   signInWithGooglePopup,
   createUserDocFromAuth,
 } from "../../utils/firebase/firebase.utils";
-import SingUpForm from "../../components/sign-up/sign-up.component";
+import SingUpForm from "../../components/sign-up-form/sign-up-form.component";
 
 const SignIn = () => {
   

@@ -15,7 +15,6 @@ const SingUpForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const {  displayName, email, password, confirmPassword } = formFields;
 
-    console.log(formFields);
 
     const resetFormFields = () => {
         setFormFields(defaultFormFields);
@@ -24,15 +23,19 @@ const SingUpForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+
         if(password !== confirmPassword) {
-            alert('password od not match');
+            alert('password do not match');
             return;
         }
 
         try{
+
+            console.log(`Username is: ${email} and password is ${password}`);
             const {user} = await createAuthUserWithEmailAndPassword(email, password);
 
             await createUserDocFromAuth(user, {displayName})
+            console.log(user);
             resetFormFields();
 
         }catch(error){
@@ -61,9 +64,9 @@ const SingUpForm = () => {
 
                 <FormInput label='Display Name' type="text" required onChange={handleChange} name='displayName' value={displayName}></FormInput>
 
-                <FormInput label='Email' className='email' type="email" required onChange={handleChange} name='email' value={email}></FormInput>
+                <FormInput label='Email' type="email" required onChange={handleChange} name='email' value={email}></FormInput>
 
-                <FormInput label='Password' className='password' type="password" required onChange={handleChange} name='password' value={password}></FormInput>
+                <FormInput label='Password' type="password" required onChange={handleChange} name='password' value={password}></FormInput>
 
                 <FormInput label='Confirm Password' type="password" required onChange={handleChange} name='confirmPassword' value={confirmPassword}></FormInput>
 

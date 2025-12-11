@@ -5,6 +5,7 @@ import "./navigation-bar.styles.scss";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/user.context";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
+import CartIcon from "../../components/cart-icon/cart-icon.component";
 
 const NavigationBar = () => {
   const { currentUser } = useContext(UserContext);
@@ -28,6 +29,7 @@ const NavigationBar = () => {
               Sign In
             </Link>
           )}
+          <CartIcon/>
         </div>
       </div>
       <Outlet />

@@ -1,10 +1,11 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const CartContext = createContext({
     visibility: false,
     setVisibility: () => {},
     cartItems: [],
     addItemToCart: () => {},
+    cartCount: 0
 });
 
 const addCartItem = (cartItems, productToAdd) => {
@@ -24,12 +25,18 @@ const addCartItem = (cartItems, productToAdd) => {
 export const CartProvider = ({children}) => {
     const [visibility, setVisibility] = useState(false);
     const [ cartItems, setCardItems] = useState([])
+    const [ cartCount, setCartCount ] = useState(0);
+
+    useEffect(()=> {
+        const newCartCount = cartItems.reduce((currentTotal, cartItem)=> currentTotal + cartItem.quantity, 0)
+        setCartCount(newCartCount);
+    }, [cartItems]);
 
     const addItemToCart = (productToAdd) => {
         setCardItems(addCartItem(cartItems, productToAdd));
     }
 
-    const value = {visibility, setVisibility, addItemToCart, cartItems};
+    const value = {visibility, setVisibility, addItemToCart, cartItems, cartCount};
 
     
 

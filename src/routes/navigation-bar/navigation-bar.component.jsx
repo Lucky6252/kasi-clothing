@@ -13,8 +13,6 @@ const NavigationBar = () => {
   const { currentUser } = useContext(UserContext);
   const { visibility, setVisibility } = useContext(CartContext);
 
-  
-
   return (
     <Fragment>
       <div className="navigation">
@@ -36,9 +34,9 @@ const NavigationBar = () => {
               Sign In
             </Link>
           )}
-            <CartIcon />
+          <CartIcon />
         </div>
-        {visibility && <CartDropdown /> }
+        {visibility && <CartDropdown />}
       </div>
       <Outlet />
     </Fragment>

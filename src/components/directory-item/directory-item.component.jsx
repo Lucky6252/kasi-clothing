@@ -1,0 +1,19 @@
+import { DirectoryItemContainer, BackgroundImage, CategoryContainer, Body, Title, ShopNow } from "./directory-item.styles";
+
+const DirectoryItem = ({ category }) => {
+  const { title, imageUrl } = category;
+
+  return (
+    <DirectoryItemContainer>
+      <BackgroundImage
+        style={{ backgroundImage: `url(${imageUrl})` }}
+      />
+      <Body>
+        <Title>{title}</Title>
+        <ShopNow>Shop Now</ShopNow>
+      </Body>
+    </DirectoryItemContainer>
+  );
+};
+
+export default DirectoryItem;

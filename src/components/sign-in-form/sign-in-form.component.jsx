@@ -1,4 +1,4 @@
-import "./sign-in-form.styles.scss";
+import { SignInButtoncontainer } from "./sign-in-form.styles";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 import { useState } from "react";
@@ -81,12 +81,12 @@ const SignInForm = () => {
           value={password}
         ></FormInput>
 
-        <div className="sign-in-button-container">
+        <SignInButtoncontainer>
           <Button type="submit">Sign in</Button>
           <Button onClick={signInWithGoogle} buttonType="google" type="button">
             Sign in with Google
           </Button>
-        </div>
+        </SignInButtoncontainer>
       </form>
     </div>
   );

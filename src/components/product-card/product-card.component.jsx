@@ -1,4 +1,4 @@
-import { ProductCardContainer, ImageStyle, ButtonStyle, Name, Price } from "./product-card.styles";
+import { ProductCardContainer, ImageStyle, Name, Price } from "./product-card.styles";
 import Button from "../button/button.component";
 import { useContext } from "react";
 import { CartContext } from "../../contexts/cart-list.context";

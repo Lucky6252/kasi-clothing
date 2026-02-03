@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
-const mainColor = 'black';
-const subColor = 'grey'; // Assumed value for $sub-color
+const mainColor = "black";
+const subColor = "grey"; // Assumed value for $sub-color
 
 const shrinkLabelStyles = css`
   top: -14px;
@@ -13,7 +13,7 @@ export const GroupContainer = styled.div`
   position: relative;
   margin: 45px 0;
 
-  input[type='password'] {
+  input[type="password"] {
     letter-spacing: 0.3em;
   }
 `;
@@ -35,7 +35,7 @@ export const FormInputs = styled.input`
     outline: none;
   }
 
-  &:focus ~ label {
+  &:focus ~ ${FormInputLabel} {
     ${shrinkLabelStyles}
   }
 `;
@@ -50,7 +50,5 @@ export const FormInputLabel = styled.label`
   top: 10px;
   transition: 300ms ease all;
 
-  &.shrink {
-    ${shrinkLabelStyles}
-  }
+  &{({shrink})=> shrink && shrinkLabelStyles};
 `;

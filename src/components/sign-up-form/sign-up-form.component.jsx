@@ -31,20 +31,18 @@ const SingUpForm = () => {
     }
 
     try {
-      console.log(`Username is: ${email} and password is ${password}`);
       const { user } = await createAuthUserWithEmailAndPassword(
         email,
         password
       );
 
       await createUserDocFromAuth(user, { displayName });
-      console.log(user);
       resetFormFields();
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         alert("cannot create user, email already in use");
       } else {
-        console.log("user creation encontered an errror", error);
+        alert("user creation encontered an errror", error);
       }
     }
   };

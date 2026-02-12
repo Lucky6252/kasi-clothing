@@ -29,12 +29,13 @@ const SignInForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    
     try {
-      await signInAuthUserWithEmailAndPassword(
+      await signInAuthUserWithEmailAndPassword( 
         email,
         password
       );
+      
       resetFormFields();
     } catch (error) {
       switch (error.code) {
@@ -57,7 +58,7 @@ const SignInForm = () => {
   };
 
   return (
-    <div className="sign-up-container">
+    <div>
       <h2>I already have an account</h2>
       <span>Sign in with your email and password</span>
 

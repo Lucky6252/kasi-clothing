@@ -1,4 +1,5 @@
-import { createContext, useEffect, useState, useReducer } from "react";
+import { createContext, useReducer } from "react";
+import {createAction} from '../utils/reducer/reducer.utils'
 
 //-------------------------------- Cart Context ---------------------------------------------------------------
 
@@ -26,6 +27,7 @@ const addCartItem = (cartItems, productToAdd) => {
     );
   } else {
     return [...cartItems, { ...productToAdd, quantity: 1 }];
+    
   }
 };
 
@@ -50,7 +52,7 @@ const removeCartItem = (cartItems, itemToRemove) => {
 const clearCartItem = ( cartItems, itemToClear) => cartItems.filter((cartItem)=> cartItem.id !== itemToClear.id);
 
 const Initial_State = {
-  visibility: true,
+  visibility: false,
   cartItems: [],
   cartCount: 0,
   cartTotal: 0
@@ -69,7 +71,7 @@ const cartReducer = (state, action) => {
     case CART_ACTION_TYPES.ADD_CART_ITEMS:
       return{
         ...state,
-        ...payload,
+        ...payload
       }
     case CART_ACTION_TYPES.SET_CART_VISIBILITY:
       return{
@@ -84,49 +86,28 @@ const cartReducer = (state, action) => {
 //------------------------------ Cart Provider method -------------------------------------------------------------
 
 export const CartProvider = ({ children }) => {
-//   const [visibility, setVisibility] = useState(false);
-//   const [cartItems, setCardItems] = useState([]);
-//   const [cartCount, setCartCount] = useState(0);
-//   const [cartTotal, setCartTotal] = useState(0);
 
-//   //Monitors the count of items selected. The number shows in the cart logo
-//   useEffect(() => {
-//     const newCartCount = cartItems.reduce(
-//       (currentTotal, cartItem) => currentTotal + cartItem.quantity,
-//       0,
-//     );
-//     setCartCount(newCartCount);
-//   }, [cartItems]);
 
-// //Monitors the total amount for the items in the cart
-//   useEffect(() => {
-//     const newCartTotal = cartItems.reduce(
-//       (currentTotal, cartItem) => currentTotal + cartItem.quantity * cartItem.price,
-//       0,
-//     );
-//     setCartTotal(newCartTotal);
-//   }, [cartItems]);
-
-  const [{visibility, cartCount, cartTotal, cartItems}, dispatch] = useReducer(cartReducer, Initial_State);
+  const [{visibility, cartItems, cartCount, cartTotal }, dispatch] = useReducer(cartReducer, Initial_State);
 
   const updateNewCart = (newCartItems) => {
 
-    const newCartCount = cartItems.reduce(
-      (currentTotal, cartItem) => currentTotal + cartItem.quantity,
-      0,
+    const newCartCount = newCartItems.reduce(
+      (total, cartItem) => total + cartItem.quantity,
+      0
     );
 
-    const newCartTotal = cartItems.reduce(
+    const newCartTotal = newCartItems.reduce(
       (currentTotal, cartItem) => currentTotal + cartItem.quantity * cartItem.price,
-      0,
+      0
     );
 
-    dispatch({type:CART_ACTION_TYPES.ADD_CART_ITEMS, payload: 
+    dispatch(createAction(CART_ACTION_TYPES.ADD_CART_ITEMS, 
       {
       cartItems: newCartItems,
       cartCount: newCartCount,
       cartTotal: newCartTotal,
-    }})
+    }))
 
   }
 
@@ -150,7 +131,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const setVisibility = (bool) => {
-    dispatch({type:CART_ACTION_TYPES.SET_CART_VISIBILITY, payload: bool});
+    dispatch(createAction(CART_ACTION_TYPES.SET_CART_VISIBILITY, bool));
 
   }
 

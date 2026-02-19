@@ -9,12 +9,15 @@ import { signOutUser } from "../../utils/firebase/firebase.utils";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown-component";
 import { CartContext } from "../../contexts/cart-list.context";
+import { selectCartVisibility } from "../../store/cart/cart.selector";
+import { setCartVisibility } from "../../store/cart/cart.action";
 
 import { Navigation, LogoContainer, NavLink, NavLinks } from "./navigation-bar.styles";
 
 const NavigationBar = () => {
   const currentUser = useSelector(selectCurrentUser);
-  const { visibility, setVisibility } = useContext(CartContext);
+  //const { visibility, setVisibility } = useContext(CartContext);
+  const visibility = useSelector(selectCartVisibility)
 
   return (
     <Fragment>

@@ -46,7 +46,7 @@ export const setCartVisibility = (boolean) =>
   };
 
   //Removes item from the cart. Uses a helper method.
-  export const removeItemToCart = (cartItems, itemToRemove) => {
+  export const removeItemFromCart = (cartItems, itemToRemove) => {
     const newCartItems = removeCartItem(cartItems, itemToRemove);
     return createAction(CART_ACTION_TYPES.SET_CART_ITEMS, newCartItems);
   };

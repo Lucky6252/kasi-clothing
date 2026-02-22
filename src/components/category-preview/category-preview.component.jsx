@@ -1,8 +1,12 @@
 import { CategoryPreviewContainer, Title, Preview } from "./category-preview.styles";
 import ProductCard from "../product-card/product-card.component";
+import Spinner from "../spinner/spinner.component";
+import { selectCategoriesIsLoading } from "../../store/categories/categories.selector";
+import { useSelector } from "react-redux";
 
 
 const CategoryPreview = ({ title, products }) => {
+  const isLoading = useSelector(selectCategoriesIsLoading);
 
   return (
 

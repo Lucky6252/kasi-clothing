@@ -13,8 +13,7 @@ import {
   addItemToCart,
   removeItemFromCart,
 } from "../../store/cart/cart.reducer";
-import { useSelector } from "react-redux";
-import { selectCartItems } from "../../store/cart/cart.selector";
+
 import { useDispatch } from "react-redux";
 
 const CheckoutItem = ({ cartItem }) => {

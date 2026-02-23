@@ -14,7 +14,6 @@ import Spinner from "../../components/spinner/spinner.component";
 const Category = () => {
   const { category } = useParams();
   const categoriesMap = useSelector(selectCategoriesMap);
-  const isLoading = useSelector(selectCategoriesIsLoading);
   const [products, setProducts] = useState(categoriesMap[category]);
 
   useEffect(() => {
@@ -24,16 +23,12 @@ const Category = () => {
   return (
     <Fragment>
       <CartegoryTitle>{category.toUpperCase()}</CartegoryTitle>
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        <CategoryContainer>
-          {products &&
-            products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-        </CategoryContainer>
-      )}
+      <CategoryContainer>
+        {products &&
+          products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+      </CategoryContainer>
     </Fragment>
   );
 };

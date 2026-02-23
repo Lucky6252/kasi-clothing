@@ -1,38 +1,38 @@
-import { compose, createStore, applyMiddleware } from "redux";
+// import { compose, createStore, applyMiddleware } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
+// import { persistStore, persistReducer } from "redux-persist";
+// import storage from "redux-persist/lib/storage";
 import logger from "redux-logger";
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-// import { thunk } from "redux-thunk";
-import createSagaMiddleware from 'redux-saga'
+
 import { rootReducer } from "./root-reducer";
 
-import { rootSaga } from "./root-saga";
+const middleWares = [process.env.NODE_ENV === "development" && logger].filter(
+  Boolean,
+);
 
-const persistConfig = {
-  key: "root",
-  storage,
-  whitelist: ["cart"],
-};
+// const composeEnhancer =
+//   (process.env.NODE_ENV !== "production" &&
+//     window &&
+//     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+//   compose;
 
-const sagaMiddleware =  createSagaMiddleware();
+// const persistConfig = {
+//   key: "root",
+//   storage,
+//   blacklist: ["user"],
+// };
 
-const middleWares = [
-  process.env.NODE_ENV !== "production" && logger,
-  sagaMiddleware
-].filter(Boolean);
+// const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const composeEnhancer =
-  (process.env.NODE_ENV !== "production" &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
-  compose;
+// const composedEnhancers = composeEnhancer(applyMiddleware(...middleWares));
+
+export const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    serializableCheck: false,
+  }).concat(middleWares),
+})
 
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const storeEnhancers = composeEnhancer(applyMiddleware(...middleWares));
-
-export const store = createStore(persistedReducer, storeEnhancers);
-
-sagaMiddleware.run(rootSaga);
-
-export const persistor = persistStore(store);
+// export const persistor = persistStore(store);
